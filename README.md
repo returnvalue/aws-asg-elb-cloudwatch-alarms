@@ -32,8 +32,7 @@ The system implements a self-healing and auto-scaling compute layer:
     ```bash
     terraform init
     terraform apply -auto-approve
-    
-```
+    ```
 
 ## Verification & Testing
 
@@ -42,16 +41,14 @@ To observe the architecture in action:
 1.  **Access the Load Balancer:**
     ```bash
     curl $(terraform output -raw alb_dns_name)
-    
-```
+    ```
     Repeating this should show traffic alternating between different instance hostnames.
 
 2.  **Verify Auto Scaling Group:**
     ```bash
     awslocal autoscaling describe-auto-scaling-groups --auto-scaling-group-name asg-lab-group
     aws autoscaling describe-auto-scaling-groups --auto-scaling-group-name asg-lab-group
-    
-```
+    ```
 
 3.  **Simulate Load (Conceptual):**
     In a real environment, increasing CPU load on the instances would trigger the `cpu-high-alarm`, causing the ASG to scale out by adding more instances.
